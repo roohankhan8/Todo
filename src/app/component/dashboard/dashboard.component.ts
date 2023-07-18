@@ -13,6 +13,8 @@ export class DashboardComponent {
   addTaskValue: string = '';
   editTaskValue: string = '';
   constructor(private crudService: CrudService) {}
+
+  // THE ngOnInit FUNCTION RESETS THE PROGRAM
   ngOnInit(): void {
     this.addTaskValue = '';
     this.editTaskValue = '';
@@ -20,6 +22,7 @@ export class DashboardComponent {
     this.taskArr = [];
     this.getAllTask();
   }
+
   getAllTask() {
     this.crudService.getAllTask().subscribe(
       (res) => {
@@ -35,7 +38,6 @@ export class DashboardComponent {
     this.crudService.addTask(this.taskObj).subscribe(
       (res) => {
         this.ngOnInit();
-        this.addTaskValue = '';
       },
       (err) => {
         alert(err);
@@ -43,7 +45,7 @@ export class DashboardComponent {
     );
   }
   editTask() {
-    this.taskObj.task_name=this.editTaskValue
+    this.taskObj.task_name = this.editTaskValue;
     this.crudService.editTask(this.taskObj).subscribe(
       (res) => {
         this.ngOnInit();
@@ -63,8 +65,8 @@ export class DashboardComponent {
       }
     );
   }
-  call(etask:Task){
-    this.taskObj=etask
-    this.editTaskValue=etask.task_name
+  call(etask: Task) {
+    this.taskObj = etask;
+    this.editTaskValue = etask.task_name;
   }
 }
